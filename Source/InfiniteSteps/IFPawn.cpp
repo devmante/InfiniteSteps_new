@@ -17,7 +17,7 @@ AIFPawn::AIFPawn()
 	PrimaryActorTick.bCanEverTick = false;
 
 	PlayerRoot = CreateDefaultSubobject<USceneComponent>(TEXT("PlayerRoot"));
-	PlayerRoot->SetupAttachment(RootComponent);
+	RootComponent = PlayerRoot;
 
 	PlayerMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("PlayerMesh"));
 	PlayerMesh->SetupAttachment(PlayerRoot);

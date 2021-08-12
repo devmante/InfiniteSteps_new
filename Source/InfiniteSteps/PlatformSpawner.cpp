@@ -68,8 +68,6 @@ void APlatformSpawner::SpawnPlatform()
 	LastPlatformLoc = NewPlatform->GetActorLocation();
 
 	Platforms.Add(NewPlatform);
-
-	UE_LOG(LogTemp, Warning, TEXT("Platform spawned!"));
 }
 
 void APlatformSpawner::DeleteOldestPlatform()

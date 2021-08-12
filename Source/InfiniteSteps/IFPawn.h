@@ -27,7 +27,6 @@ public:
 	AIFPawn();
 
 	UPROPERTY(EditAnywhere)
-	//TSubclassOf<APlatformSpawner> SpawnerRef;
 	class APlatformSpawner* SpawnerRef;
 
 protected:

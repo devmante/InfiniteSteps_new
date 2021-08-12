@@ -15,6 +15,9 @@ public:
 	// Sets default values for this actor's properties
 	APlatformSpawner();
 
+	UPROPERTY(EditAnywhere)
+	class ABackgroundTower* TowerRef;
+
 	// BP platform to be spawned
 	UPROPERTY(EditAnywhere, Category = "Settings")
 	TSubclassOf<class AStepPlatform> PlatformToSpawn;
