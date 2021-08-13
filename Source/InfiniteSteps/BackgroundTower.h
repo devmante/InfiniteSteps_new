@@ -13,24 +13,29 @@ class INFINITESTEPS_API ABackgroundTower : public AActor
 
 	class USceneComponent* TowerRoot;
 
+	USceneComponent* TowerMeshesRoot;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Platform, meta = (AllowPrivateAccess = "true"))
 	class UStaticMeshComponent* Floor1;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Platform, meta = (AllowPrivateAccess = "true"))
-	class UStaticMeshComponent* Floor2;
+	UStaticMeshComponent* Floor2;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Platform, meta = (AllowPrivateAccess = "true"))
-	class UStaticMeshComponent* Floor3;
+	UStaticMeshComponent* Floor3;
 	
 public:	
 	// Sets default values for this actor's properties
 	ABackgroundTower();
 
+	void MoveTower(float PlayerYLoc);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	TArray<class UStaticMeshComponent*> Floors;
+	FVector InitialLocation;
+
+	void MoveTowerMeshes();
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

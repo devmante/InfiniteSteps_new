@@ -26,7 +26,7 @@ public:
 	// Sets default values for this pawn's properties
 	AIFPawn();
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "PlatformSpawner")
 	class APlatformSpawner* SpawnerRef;
 
 protected:

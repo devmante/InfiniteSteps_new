@@ -25,14 +25,14 @@ AIFPawn::AIFPawn()
 
 	CameraArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	CameraArm->SetupAttachment(PlayerRoot);
-	CameraArm->SetRelativeLocation(FVector(0.0f, 0.0f, 10.0f));
+	CameraArm->SetRelativeLocation(FVector(0.0f, 0.0f, 20.0f));
 	CameraArm->SetRelativeRotation(FRotator(0.0f, -180.0f, 0.0f));
-	CameraArm->TargetArmLength = 150.0f;
+	CameraArm->TargetArmLength = 80.0f;
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(CameraArm);
 	Camera->SetProjectionMode(ECameraProjectionMode::Orthographic);
-	Camera->SetOrthoWidth(256);
+	Camera->SetOrthoWidth(128);
 
 }
 

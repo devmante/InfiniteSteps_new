@@ -15,7 +15,7 @@ public:
 	// Sets default values for this actor's properties
 	APlatformSpawner();
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "References")
 	class ABackgroundTower* TowerRef;
 
 	// BP platform to be spawned
@@ -33,7 +33,7 @@ protected:
 	void ShiftPlatforms();
 
 	FVector LastPlatformLoc;										// Location of last spawned platform
-	FVector PlatformSpawnOffset = FVector(0.0f, 10.0f, 15.0f);		// Distance between platforms
+	FVector PlatformSpawnOffset = FVector(0.0f, 10.0f, 15.6f);		// Distance between platforms
 
 	int CurrentIndex;						// Which index of Platforms is the player currently at
 

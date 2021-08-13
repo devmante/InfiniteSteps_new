@@ -9,6 +9,7 @@
 #include "StepPlatform.h"
 #include "IFPawn.h"
 #include "InfiniteStepsGameMode.h"
+#include "BackgroundTower.h"
 
 // Sets default values
 APlatformSpawner::APlatformSpawner()
@@ -85,7 +86,7 @@ void APlatformSpawner::ShiftPlatforms()
 
 	for (int i = 0; i < Platforms.Num(); i++)
 	{
-		Platforms[i]->AddActorWorldOffset(FVector(0.0f, 0.0f, -15.0f));
+		Platforms[i]->AddActorWorldOffset(FVector(0.0f, 0.0f, - PlatformSpawnOffset.Z));
 	}
 
 	LastPlatformLoc =  Platforms.Last()->GetActorLocation();
@@ -99,6 +100,12 @@ void APlatformSpawner::HandlePlayerInput(bool IsLeft, AIFPawn* Player)
 
 		// Move player to next platform
 		Player->SetActorLocation(NextPlatform->GetActorLocation());
+
+		if (TowerRef)
+		{
+			TowerRef->MoveTower(Player->GetActorLocation().Y);
+		}
+
 		NextPlatform->DecreaseDurability();
 
 		// Update Index

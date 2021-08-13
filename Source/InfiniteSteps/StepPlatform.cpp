@@ -17,8 +17,8 @@ AStepPlatform::AStepPlatform()
 
 	PlatformMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PlatformMesh"));
 	PlatformMesh->SetupAttachment(RootComponent);
-	PlatformMesh->SetRelativeLocation(FVector(-20.0f, 5.0f, -10.0f));
-	PlatformMesh->SetRelativeRotation(FRotator(0.0f, 90.0f, 0.0f));
+	PlatformMesh->SetRelativeLocation(FVector(-5.0f, 10.0f, -10.0f));
+	//PlatformMesh->SetRelativeRotation(FRotator(0.0f, 90.0f, 0.0f));
 }
 
 void AStepPlatform::SetDirection(bool inDirection)
