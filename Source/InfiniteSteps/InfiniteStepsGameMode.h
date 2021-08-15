@@ -17,6 +17,10 @@ public:
 	void IncrementSteps();
 	void AddScoreAmount(int Amount);
 
+	void LoadBestScore();
+
+	void EndGame();
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -26,4 +30,6 @@ protected:
 	int BestScore = 0;
 
 	class AISHUD* HUD;
+
+	class UInfiniteStepsInstance* ISGameInstance;
 };

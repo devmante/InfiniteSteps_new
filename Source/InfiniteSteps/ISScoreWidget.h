@@ -17,6 +17,7 @@ public:
 
 	void SetScoreValue(int Value);
 	void SetStepValue(int Value);
+	void SetHighScoreValue(int Value);
 	
 private:
 	virtual void NativeConstruct() override;

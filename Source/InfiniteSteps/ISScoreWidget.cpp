@@ -29,3 +29,11 @@ void UISScoreWidget::SetStepValue(int Value)
 		StepsValue->SetText(FText::FromString(FString::FromInt(Value)));
 	}
 }
+
+void UISScoreWidget::SetHighScoreValue(int Value)
+{
+	if (BestScoreValue)
+	{
+		BestScoreValue->SetText(FText::FromString(FString::FromInt(Value)));
+	}
+}

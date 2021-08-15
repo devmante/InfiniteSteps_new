@@ -17,6 +17,7 @@ public:
 
 	void UpdateSteps(int Steps);
 	void UpdateScore(int Score);
+	void SetHighScore(int Score);
 	
 protected:
 	virtual void BeginPlay() override;

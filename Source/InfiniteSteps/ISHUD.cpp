@@ -26,6 +26,14 @@ void AISHUD::UpdateScore(int Score)
 	}
 }
 
+void AISHUD::SetHighScore(int Score)
+{
+	if (ScoreWidget)
+	{
+		ScoreWidget->SetHighScoreValue(Score);
+	}
+}
+
 void AISHUD::BeginPlay()
 {
 	if (UIClass)
