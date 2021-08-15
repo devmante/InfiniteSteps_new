@@ -20,6 +20,7 @@ public:
 	void LoadBestScore();
 
 	void EndGame();
+	void StarOverGame();
 
 protected:
 	virtual void BeginPlay() override;

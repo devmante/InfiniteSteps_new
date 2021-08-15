@@ -18,6 +18,7 @@ public:
 	void SetScoreValue(int Value);
 	void SetStepValue(int Value);
 	void SetHighScoreValue(int Value);
+	void DisplayEndScreenMenu(int Score, bool bIsNewBest);
 	
 private:
 	virtual void NativeConstruct() override;
@@ -32,4 +33,10 @@ private:
 
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* BestScoreValue;
+
+	UPROPERTY(meta = (BindWidget))
+	class UCanvasPanel* CvpGameOver;
+
+	UPROPERTY(meta = (BindWidget))
+	class UEndScreenWidget* GameOverUI;
 };

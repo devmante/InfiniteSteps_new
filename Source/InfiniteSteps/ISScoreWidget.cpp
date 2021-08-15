@@ -4,6 +4,9 @@
 #include "ISScoreWidget.h"
 
 #include "Components/TextBlock.h"
+#include "Components/CanvasPanel.h"
+
+#include "EndScreenWidget.h"
 
 void UISScoreWidget::NativeConstruct()
 {
@@ -35,5 +38,18 @@ void UISScoreWidget::SetHighScoreValue(int Value)
 	if (BestScoreValue)
 	{
 		BestScoreValue->SetText(FText::FromString(FString::FromInt(Value)));
+	}
+}
+
+void UISScoreWidget::DisplayEndScreenMenu(int Score, bool bIsNewBest)
+{
+	if (GameOverUI)
+	{
+		GameOverUI->SetScoreValue(Score, bIsNewBest);
+
+		if (CvpGameOver)
+		{
+			CvpGameOver->SetVisibility(ESlateVisibility::Visible);
+		}
 	}
 }

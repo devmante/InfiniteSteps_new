@@ -124,7 +124,10 @@ void APlatformSpawner::HandlePlayerInput(bool IsLeft, AIFPawn* Player)
 	// Game over
 	else
 	{
-
+		if (IFGameMode)
+		{
+			IFGameMode->EndGame();
+		}
 	}
 }
 

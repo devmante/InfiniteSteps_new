@@ -19,7 +19,7 @@ public:
 	bool IsNewGame();
 	void CreateNewSave();
 
-	void SaveScore();
+	void SaveScore(int Score);
 	bool LoadScore();
 
 	UPROPERTY()

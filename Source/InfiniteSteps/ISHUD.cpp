@@ -10,6 +10,21 @@ AISHUD::AISHUD()
 
 }
 
+void AISHUD::BeginPlay()
+{
+}
+
+void AISHUD::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	if (UIClass)
+	{
+		ScoreWidget = CreateWidget<UISScoreWidget>(GetWorld(), UIClass);
+		ScoreWidget->AddToViewport();
+	}
+}
+
 void AISHUD::UpdateSteps(int Steps)
 {
 	if (ScoreWidget)
@@ -34,11 +49,10 @@ void AISHUD::SetHighScore(int Score)
 	}
 }
 
-void AISHUD::BeginPlay()
+void AISHUD::ShowEndGameMenu(int Score, bool bIsNewBest)
 {
-	if (UIClass)
+	if (ScoreWidget)
 	{
-		ScoreWidget = CreateWidget<UISScoreWidget>(GetWorld(), UIClass);
-		ScoreWidget->AddToViewport();
+		ScoreWidget->DisplayEndScreenMenu(Score, bIsNewBest);
 	}
 }

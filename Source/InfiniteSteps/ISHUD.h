@@ -18,6 +18,7 @@ public:
 	void UpdateSteps(int Steps);
 	void UpdateScore(int Score);
 	void SetHighScore(int Score);
+	void ShowEndGameMenu(int Score, bool bIsNewBest);
 	
 protected:
 	virtual void BeginPlay() override;
@@ -26,4 +27,7 @@ protected:
 	TSubclassOf<class UUserWidget> UIClass;
 
 	class UISScoreWidget* ScoreWidget;
+
+private:
+	virtual void PostInitializeComponents() override;
 };

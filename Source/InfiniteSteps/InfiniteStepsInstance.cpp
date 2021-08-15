@@ -12,12 +12,8 @@ const FString UInfiniteStepsInstance::ScoresSaveGameName = "High_Score_Data";
 // Check if save file exists
 bool UInfiniteStepsInstance::IsNewGame()
 {
-    if (UGameplayStatics::DoesSaveGameExist(ScoresSaveGameName, 0))
-    {
-        return true;
-    }
+    return !UGameplayStatics::DoesSaveGameExist(ScoresSaveGameName, 0);
 
-    return false;
 }
 
 // Create new save file
@@ -30,16 +26,18 @@ void UInfiniteStepsInstance::CreateNewSave()
         if (NewSaveGame)
         {
             ScoresSaveGame = Cast<UHighScoresSaveGame>(NewSaveGame);
+            SaveScore(0);
         }
 
 	}
 }
 
 // Save score to file
-void UInfiniteStepsInstance::SaveScore()
+void UInfiniteStepsInstance::SaveScore(int Score)
 {
     if (ScoresSaveGame)
     {
+        ScoresSaveGame->InfiniteModeHighScore = Score;
         UGameplayStatics::SaveGameToSlot(ScoresSaveGame, ScoresSaveGameName, 0);
     }
 }

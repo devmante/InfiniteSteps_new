@@ -50,6 +50,18 @@ void AInfiniteStepsGameMode::LoadBestScore()
 
 void AInfiniteStepsGameMode::EndGame()
 {
+	if (Score > BestScore && ISGameInstance)
+	{
+		ISGameInstance->SaveScore(Score);
+	}
+	if (HUD)
+	{
+		HUD->ShowEndGameMenu(Score, Score > BestScore);
+	}
+}
+
+void AInfiniteStepsGameMode::StarOverGame()
+{
 }
 
 void AInfiniteStepsGameMode::IncrementSteps()
