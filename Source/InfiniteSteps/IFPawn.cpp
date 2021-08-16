@@ -50,15 +50,6 @@ void AIFPawn::Tick(float DeltaTime)
 
 }
 
-// Called to bind functionality to input
-void AIFPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	PlayerInputComponent->BindAction("Left", IE_Pressed, this, &AIFPawn::MoveLeft);
-	PlayerInputComponent->BindAction("Right", IE_Pressed, this, &AIFPawn::MoveRight);
-}
-
 void AIFPawn::RotateMesh(bool Left)
 {
 	// Rotate left
@@ -69,26 +60,5 @@ void AIFPawn::RotateMesh(bool Left)
 	else
 	{
 		PlayerMesh->SetRelativeRotation(FRotator(0.0f, -135.0f, 0.0f));
-	}
-
-}
-
-void AIFPawn::MoveLeft()
-{
-	RotateMesh(true);
-
-	if (SpawnerRef)
-	{
-		SpawnerRef->HandlePlayerInput(true, this);
-	}
-}
-
-void AIFPawn::MoveRight()
-{
-	RotateMesh(false);
-
-	if (SpawnerRef)
-	{
-		SpawnerRef->HandlePlayerInput(false, this);
 	}
 }
