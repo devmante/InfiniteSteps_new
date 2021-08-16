@@ -56,12 +56,21 @@ void AInfiniteStepsGameMode::EndGame()
 	}
 	if (HUD)
 	{
+		FInputModeUIOnly InputData;
+		UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(InputData);
+		UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetShowMouseCursor(true);
+
 		HUD->ShowEndGameMenu(Score, Score > BestScore);
 	}
 }
 
 void AInfiniteStepsGameMode::StarOverGame()
 {
+	FInputModeGameOnly InputData;
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(InputData);
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetShowMouseCursor(false);
+
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->RestartLevel();
 }
 
 void AInfiniteStepsGameMode::IncrementSteps()

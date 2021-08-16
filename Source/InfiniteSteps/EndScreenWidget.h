@@ -21,7 +21,9 @@ private:
 
 	void NativeOnInitialized() override;
 
+	UFUNCTION()
 	void PlayAgainButtonClicked();
+	UFUNCTION()
 	void ExitButtonClicked();
 
 	UPROPERTY(meta = (BindWidget))
