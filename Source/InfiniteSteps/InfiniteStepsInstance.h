@@ -16,6 +16,7 @@ class INFINITESTEPS_API UInfiniteStepsInstance : public UGameInstance
 	
 public:
 
+	// High Scores
 	bool IsNewGame();
 	void CreateNewSave();
 
@@ -25,8 +26,20 @@ public:
 	UPROPERTY()
 	class UHighScoresSaveGame* ScoresSaveGame;
 
+	// Player Data
+
+	UPROPERTY()
+	class UPlayerDataSaveGame* DataSaveGame;
+
+	bool DoesPlayerDataExist();
+	void CreatePlayerDataSave();
+
+	void SavePlayerData(uint8 Style);
+	bool LoadPlayerData();
+
 private:
 
 	static const FString ScoresSaveGameName;
+	static const FString PlayerDataSaveGameName;
 
 };

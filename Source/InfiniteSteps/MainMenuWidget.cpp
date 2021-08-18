@@ -8,6 +8,9 @@
 #include "Components/Image.h"
 #include "Kismet/GameplayStatics.h"
 
+#include "InfiniteStepsInstance.h"
+#include "PlayerDataSaveGame.h"
+
 void UMainMenuWidget::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
@@ -26,6 +29,13 @@ void UMainMenuWidget::NativeOnInitialized()
 	StyleChoiceBgs.Add(ImgStyle2Bg);
 	StyleChoiceBgs.Add(ImgStyle3Bg);
 	StyleChoiceBgs.Add(ImgStyle4Bg);
+
+	ISGameInstance = Cast<UInfiniteStepsInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+
+	if (ISGameInstance)
+	{
+		LoadPlayerStyle();
+	}
 }
 
 void UMainMenuWidget::LaunchInfiniteMode()
@@ -61,6 +71,11 @@ void UMainMenuWidget::ReturnToMainMenu()
 	if (WsMenuSwitcher)
 	{
 		WsMenuSwitcher->SetActiveWidgetIndex(0);
+
+		if (ISGameInstance)
+		{
+			ISGameInstance->SavePlayerData(PlayerOneStyleChoice);
+		}
 	}
 }
 
@@ -70,6 +85,7 @@ void UMainMenuWidget::Style1Selected()
 	{
 		ImgStyle1Bg->SetBrushTintColor(FSlateColor(FLinearColor::Black));
 		DeselectStyleChoices(ImgStyle1Bg);
+		PlayerOneStyleChoice = 0;
 	}
 }
 
@@ -79,6 +95,7 @@ void UMainMenuWidget::Style2Selected()
 	{
 		ImgStyle2Bg->SetBrushTintColor(FSlateColor(FLinearColor::Black));
 		DeselectStyleChoices(ImgStyle2Bg);
+		PlayerOneStyleChoice = 1;
 	}
 }
 
@@ -88,6 +105,7 @@ void UMainMenuWidget::Style3Selected()
 	{
 		ImgStyle3Bg->SetBrushTintColor(FSlateColor(FLinearColor::Black));
 		DeselectStyleChoices(ImgStyle3Bg);
+		PlayerOneStyleChoice = 2;
 	}
 }
 
@@ -97,5 +115,41 @@ void UMainMenuWidget::Style4Selected()
 	{
 		ImgStyle4Bg->SetBrushTintColor(FSlateColor(FLinearColor::Black));
 		DeselectStyleChoices(ImgStyle4Bg);
+		PlayerOneStyleChoice = 3;
+	}
+}
+
+// Load player style and select appropriate button in style menu
+void UMainMenuWidget::LoadPlayerStyle()
+{
+	if (ISGameInstance->DoesPlayerDataExist())	// Create data save if none exists
+	{
+		if (ISGameInstance->LoadPlayerData())	// Load data from file
+		{
+			switch (ISGameInstance->DataSaveGame->PlayerOneStyle)
+			{
+			case 0:
+				Style1Selected();
+				break;
+			case 1:
+				Style2Selected();
+				break;
+			case 2:
+				Style3Selected();
+				break;
+			case 3:
+				Style4Selected();
+				break;
+			default:
+				Style1Selected();
+				break;
+			}
+
+		}
+	}
+	else
+	{
+		ISGameInstance->CreatePlayerDataSave();
+		Style1Selected();
 	}
 }

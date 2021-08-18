@@ -6,9 +6,13 @@
 #include "Kismet/GameplayStatics.h"
 
 #include "HighScoresSaveGame.h"
+#include "PlayerDataSaveGame.h"
 
 const FString UInfiniteStepsInstance::ScoresSaveGameName = "High_Score_Data";
+const FString UInfiniteStepsInstance::PlayerDataSaveGameName = "Player_Data";
 
+// ***
+// High scores - start
 // Check if save file exists
 bool UInfiniteStepsInstance::IsNewGame()
 {
@@ -52,6 +56,56 @@ bool UInfiniteStepsInstance::LoadScore()
     if (Slot != nullptr)
     {
         ScoresSaveGame = Cast<UHighScoresSaveGame>(Slot);
+        return true;
+    }
+
+    return false;
+}
+// High scores end
+
+// ***
+// Player data start
+// Check if player data file exists
+bool UInfiniteStepsInstance::DoesPlayerDataExist()
+{
+    return UGameplayStatics::DoesSaveGameExist(PlayerDataSaveGameName, 1);
+}
+
+// Create player data save file
+void UInfiniteStepsInstance::CreatePlayerDataSave()
+{
+    if (DataSaveGame == nullptr)
+    {
+        USaveGame* NewSaveGame = UGameplayStatics::CreateSaveGameObject(UPlayerDataSaveGame::StaticClass());
+
+        if (NewSaveGame)
+        {
+            DataSaveGame = Cast<UPlayerDataSaveGame>(NewSaveGame);
+            UGameplayStatics::SaveGameToSlot(DataSaveGame, PlayerDataSaveGameName, 1);
+        }
+    }
+}
+
+// Save player style choice
+void UInfiniteStepsInstance::SavePlayerData(uint8 Style)
+{
+    if (DataSaveGame)
+    {
+        DataSaveGame->PlayerOneStyle = Style;
+        UGameplayStatics::SaveGameToSlot(DataSaveGame, PlayerDataSaveGameName, 1);
+    }
+}
+
+// Load player data file
+bool UInfiniteStepsInstance::LoadPlayerData()
+{
+    DataSaveGame = nullptr;
+
+    USaveGame* Slot = UGameplayStatics::LoadGameFromSlot(PlayerDataSaveGameName, 1);
+
+    if (Slot != nullptr)
+    {
+        DataSaveGame = Cast<UPlayerDataSaveGame>(Slot);
         return true;
     }
 

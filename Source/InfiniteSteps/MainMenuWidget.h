@@ -16,6 +16,8 @@ class INFINITESTEPS_API UMainMenuWidget : public UUserWidget
 
 private:
 
+	class UInfiniteStepsInstance* ISGameInstance;
+
 	UFUNCTION()
 	void LaunchInfiniteMode();
 	UFUNCTION()
@@ -35,6 +37,10 @@ private:
 	UFUNCTION()
 	void Style4Selected();
 
+	void LoadPlayerStyle();
+
+	uint8 PlayerOneStyleChoice = 0;
+
 	TArray<UImage*> StyleChoiceBgs;
 	
 private:
@@ -45,6 +51,7 @@ private:
 	class UWidgetSwitcher* WsMenuSwitcher;
 
 	// Main menu
+
 	UPROPERTY(meta = (BindWidget))
 	class UButton* BtnInfiniteMode;
 
