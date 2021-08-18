@@ -29,6 +29,18 @@ public:
 	UPROPERTY(EditAnywhere, Category = "PlatformSpawner")
 	class APlatformSpawner* SpawnerRef;
 
+	UPROPERTY(EditDefaultsOnly, Category = Appearance)
+	class UMaterial* Style1;
+
+	UPROPERTY(EditDefaultsOnly, Category = Appearance)
+	UMaterial* Style2;
+
+	UPROPERTY(EditDefaultsOnly, Category = Appearance)
+	UMaterial* Style3;
+
+	UPROPERTY(EditDefaultsOnly, Category = Appearance)
+	UMaterial* Style4;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
