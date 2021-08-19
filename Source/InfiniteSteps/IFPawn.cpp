@@ -9,6 +9,7 @@
 #include "Camera/CameraComponent.h"
 
 #include "PlatformSpawner.h"
+#include "ISPlayerController.h"
 
 // Sets default values
 AIFPawn::AIFPawn()
@@ -41,6 +42,12 @@ void AIFPawn::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	AISPlayerController* ISController = Cast<AISPlayerController>(GetController());
+	if (ISController)
+	{
+		FInputModeGameOnly InputData;
+		ISController->SetInputMode(InputData);
+	}
 }
 
 // Called every frame
