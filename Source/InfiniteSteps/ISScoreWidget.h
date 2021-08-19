@@ -19,7 +19,20 @@ public:
 	void SetStepValue(int Value);
 	void SetHighScoreValue(int Value);
 	void DisplayEndScreenMenu(int Score, bool bIsNewBest);
+	void SetPlayerIcon(uint8 Style);
 	
+	UPROPERTY(EditDefaultsOnly, Category = PlayerIcons)
+	class UTexture2D* PlayerIcon1;
+
+	UPROPERTY(EditDefaultsOnly, Category = PlayerIcons)
+	UTexture2D* PlayerIcon2;
+
+	UPROPERTY(EditDefaultsOnly, Category = PlayerIcons)
+	UTexture2D* PlayerIcon3;
+
+	UPROPERTY(EditDefaultsOnly, Category = PlayerIcons)
+	UTexture2D* PlayerIcon4;
+
 private:
 	virtual void NativeConstruct() override;
 
@@ -39,4 +52,9 @@ private:
 
 	UPROPERTY(meta = (BindWidget))
 	class UEndScreenWidget* GameOverUI;
+
+	UPROPERTY(meta = (BindWidget))
+	class UImage* ImgPlayerIcon;
+
+	class AIFPawn* PawnRef;
 };

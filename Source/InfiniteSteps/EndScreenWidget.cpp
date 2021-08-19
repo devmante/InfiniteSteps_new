@@ -5,6 +5,7 @@
 
 #include "Components/TextBlock.h"
 #include "Components/Button.h"
+#include "Components/Image.h"
 #include "Kismet/GameplayStatics.h"
 
 #include "InfiniteStepsGameMode.h"
@@ -19,6 +20,28 @@ void UEndScreenWidget::SetScoreValue(int Value, bool bIsNewBest)
 	if (TxtNewBest && bIsNewBest)
 	{
 		TxtNewBest->SetVisibility(ESlateVisibility::Visible);
+	}
+}
+
+void UEndScreenWidget::SetPlayerIcon(uint8 Style)
+{
+	switch (Style)
+	{
+	case 1:
+		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon1);
+		break;
+	case 2:
+		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon2);
+		break;
+	case 3:
+		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon3);
+		break;
+	case 4:
+		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon4);
+		break;
+	default:
+		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon1);
+		break;
 	}
 }
 
@@ -49,5 +72,5 @@ void UEndScreenWidget::PlayAgainButtonClicked()
 
 void UEndScreenWidget::ExitButtonClicked()
 {
-	// TODO: add main menu, and travel to it here!
+	UGameplayStatics::OpenLevel(GetWorld(), "Map_IS_Main_Menu");
 }

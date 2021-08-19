@@ -7,9 +7,12 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 #include "PlatformSpawner.h"
 #include "ISPlayerController.h"
+#include "InfiniteStepsInstance.h"
+#include "PlayerDataSaveGame.h"
 
 // Sets default values
 AIFPawn::AIFPawn()
@@ -47,6 +50,39 @@ void AIFPawn::BeginPlay()
 	{
 		FInputModeGameOnly InputData;
 		ISController->SetInputMode(InputData);
+	}
+
+	// Load player appearance option and set
+	ISInstance = Cast<UInfiniteStepsInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	if (ISInstance)
+	{
+		if (ISInstance->LoadPlayerData())	// Load data from file
+		{
+			switch (ISInstance->DataSaveGame->PlayerOneStyle)
+			{
+			case 0:
+				PlayerMesh->SetMaterial(0, Style1);
+				PlayerStyle = 0;
+				break;
+			case 1:
+				PlayerMesh->SetMaterial(0, Style2);
+				PlayerStyle = 2;
+				break;
+			case 2:
+				PlayerMesh->SetMaterial(0, Style3);
+				PlayerStyle = 3;
+				break;
+			case 3:
+				PlayerMesh->SetMaterial(0, Style4);
+				PlayerStyle = 4;
+				break;
+			default:
+				PlayerMesh->SetMaterial(0, Style1);
+				PlayerStyle = 0;
+				break;
+			}
+
+		}
 	}
 }
 

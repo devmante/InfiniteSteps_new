@@ -22,6 +22,7 @@ class INFINITESTEPS_API AIFPawn : public APawn
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* Camera;
 
+	class UInfiniteStepsInstance* ISInstance;
 public:
 	// Sets default values for this pawn's properties
 	AIFPawn();
@@ -41,6 +42,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Appearance)
 	UMaterial* Style4;
 
+	uint8 PlayerStyle = 0;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

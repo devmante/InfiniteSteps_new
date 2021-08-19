@@ -16,6 +16,21 @@ class INFINITESTEPS_API UEndScreenWidget : public UUserWidget
 
 public:
 	void SetScoreValue(int Value, bool bIsNewBest);
+	void SetPlayerIcon(uint8 Style);
+
+	// TODO: Create player icon widget that handles loading and setting the right icon
+
+	UPROPERTY(EditDefaultsOnly, Category = PlayerIcons)
+	class UTexture2D* PlayerIcon1;
+
+	UPROPERTY(EditDefaultsOnly, Category = PlayerIcons)
+	UTexture2D* PlayerIcon2;
+
+	UPROPERTY(EditDefaultsOnly, Category = PlayerIcons)
+	UTexture2D* PlayerIcon3;
+
+	UPROPERTY(EditDefaultsOnly, Category = PlayerIcons)
+	UTexture2D* PlayerIcon4;
 
 private:
 
@@ -37,4 +52,7 @@ private:
 
 	UPROPERTY(meta = (BindWidget))
 	UButton* BtnExit;
+
+	UPROPERTY(meta = (BindWidget))
+	class UImage* ImgPlayerIcon;
 };
