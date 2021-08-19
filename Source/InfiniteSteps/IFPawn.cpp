@@ -66,15 +66,15 @@ void AIFPawn::BeginPlay()
 				break;
 			case 1:
 				PlayerMesh->SetMaterial(0, Style2);
-				PlayerStyle = 2;
+				PlayerStyle = 1;
 				break;
 			case 2:
 				PlayerMesh->SetMaterial(0, Style3);
-				PlayerStyle = 3;
+				PlayerStyle = 2;
 				break;
 			case 3:
 				PlayerMesh->SetMaterial(0, Style4);
-				PlayerStyle = 4;
+				PlayerStyle = 3;
 				break;
 			default:
 				PlayerMesh->SetMaterial(0, Style1);

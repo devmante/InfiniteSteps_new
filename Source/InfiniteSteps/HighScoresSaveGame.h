@@ -17,9 +17,6 @@ class INFINITESTEPS_API UHighScoresSaveGame : public USaveGame
 public:
 
 	UPROPERTY()
-	FString SaveGameName;
-
-	UPROPERTY()
 	int InfiniteModeHighScore;
 
 };

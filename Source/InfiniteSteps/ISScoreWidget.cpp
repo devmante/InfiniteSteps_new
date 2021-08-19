@@ -69,16 +69,16 @@ void UISScoreWidget::SetPlayerIcon(uint8 Style)
 {
 	switch (Style)
 	{
-	case 1:
+	case 0:
 		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon1);
 		break;
-	case 2:
+	case 1:
 		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon2);
 		break;
-	case 3:
+	case 2:
 		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon3);
 		break;
-	case 4:
+	case 3:
 		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon4);
 		break;
 	default:

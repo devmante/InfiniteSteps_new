@@ -16,6 +16,7 @@ class INFINITESTEPS_API UPlayerDataSaveGame : public USaveGame
 
 public:
 
+	UPROPERTY()
 	uint8 PlayerOneStyle = 0;
 	
 };

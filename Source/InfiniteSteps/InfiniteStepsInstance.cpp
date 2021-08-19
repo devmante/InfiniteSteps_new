@@ -68,7 +68,7 @@ bool UInfiniteStepsInstance::LoadScore()
 // Check if player data file exists
 bool UInfiniteStepsInstance::DoesPlayerDataExist()
 {
-    return UGameplayStatics::DoesSaveGameExist(PlayerDataSaveGameName, 1);
+    return UGameplayStatics::DoesSaveGameExist(PlayerDataSaveGameName, 0);
 }
 
 // Create player data save file
@@ -81,7 +81,7 @@ void UInfiniteStepsInstance::CreatePlayerDataSave()
         if (NewSaveGame)
         {
             DataSaveGame = Cast<UPlayerDataSaveGame>(NewSaveGame);
-            UGameplayStatics::SaveGameToSlot(DataSaveGame, PlayerDataSaveGameName, 1);
+            UGameplayStatics::SaveGameToSlot(DataSaveGame, PlayerDataSaveGameName, 0);
         }
     }
 }
@@ -92,7 +92,7 @@ void UInfiniteStepsInstance::SavePlayerData(uint8 Style)
     if (DataSaveGame)
     {
         DataSaveGame->PlayerOneStyle = Style;
-        UGameplayStatics::SaveGameToSlot(DataSaveGame, PlayerDataSaveGameName, 1);
+        bool bSaved = UGameplayStatics::SaveGameToSlot(DataSaveGame, PlayerDataSaveGameName, 0);
     }
 }
 
@@ -101,7 +101,7 @@ bool UInfiniteStepsInstance::LoadPlayerData()
 {
     DataSaveGame = nullptr;
 
-    USaveGame* Slot = UGameplayStatics::LoadGameFromSlot(PlayerDataSaveGameName, 1);
+    USaveGame* Slot = UGameplayStatics::LoadGameFromSlot(PlayerDataSaveGameName, 0);
 
     if (Slot != nullptr)
     {

@@ -26,6 +26,13 @@ public:
 	void SetDirection(bool inDirection);
 	bool GetDirection() { return isLeft; };
 
+	// Durability animation
+	UPROPERTY()
+	class UTimelineComponent* ShakeTimeline;
+
+	UPROPERTY()
+	class UCurveFloat* ShakeCurve;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
