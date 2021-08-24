@@ -52,7 +52,6 @@ void APlatformSpawner::SpawnPlatform()
 		FActorSpawnParameters SpawnParams;
 		SpawnLoc = LastPlatformLoc + PlatformSpawnOffset;
 		NewPlatform = GetWorld()->SpawnActor<AStepPlatform>(PlatformToSpawn, SpawnLoc, GetActorRotation(), SpawnParams);
-		NewPlatform->SetDirection(Direction);
 	}
 	// Spawn platform to the right
 	else
@@ -63,10 +62,12 @@ void APlatformSpawner::SpawnPlatform()
 
 		FActorSpawnParameters SpawnParams;
 		NewPlatform = GetWorld()->SpawnActor<AStepPlatform>(PlatformToSpawn, SpawnLoc, GetActorRotation(), SpawnParams);
-		NewPlatform->SetDirection(Direction);
 	}
 
 	LastPlatformLoc = NewPlatform->GetActorLocation();
+
+	NewPlatform->SetDirection(Direction);
+	NewPlatform->SpawnerRef = this;
 
 	Platforms.Add(NewPlatform);
 }
@@ -108,6 +109,8 @@ void APlatformSpawner::HandlePlayerInput(bool IsLeft, AIFPawn* Player)
 
 		NextPlatform->DecreaseDurability();
 
+		// Update current platform
+		CurrentPlatform = NextPlatform;
 		// Update Index
 		CurrentIndex = Platforms.Find(NextPlatform);
 		// Set next platform
@@ -124,10 +127,15 @@ void APlatformSpawner::HandlePlayerInput(bool IsLeft, AIFPawn* Player)
 	// Game over
 	else
 	{
-		if (IFGameMode)
-		{
-			IFGameMode->EndGame();
-		}
+		EndGame();
+	}
+}
+
+void APlatformSpawner::EndGame()
+{
+	if (IFGameMode)
+	{
+		IFGameMode->EndGame();
 	}
 }
 

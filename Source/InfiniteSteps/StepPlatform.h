@@ -19,6 +19,7 @@ class INFINITESTEPS_API AStepPlatform : public AActor
 	// In which direction does this platform go from the previous platform
 	UPROPERTY(VisibleAnywhere)
 	bool isLeft = true;
+
 public:	
 	// Sets default values for this actor's properties
 	AStepPlatform();
@@ -26,12 +27,10 @@ public:
 	void SetDirection(bool inDirection);
 	bool GetDirection() { return isLeft; };
 
-	// Durability animation
-	UPROPERTY()
-	class UTimelineComponent* ShakeTimeline;
-
-	UPROPERTY()
+	UPROPERTY(EditDefaultsOnly, Category = ShakeAnimation)
 	class UCurveFloat* ShakeCurve;
+
+	class APlatformSpawner* SpawnerRef;
 
 protected:
 	// Called when the game starts or when spawned
@@ -39,13 +38,21 @@ protected:
 
 	// Seconds until platform will collapse once stepped on
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	float Durability = 3;
+	float Durability = 4;
 
+	// ***
+	// Durability animation
+	UPROPERTY()
+	class UTimelineComponent* ShakeTimeline;
+
+	UFUNCTION()
+	void ShakeTimelineReturnValue(float Value);
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION()
 	void DecreaseDurability();
 
 private:

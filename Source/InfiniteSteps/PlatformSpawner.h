@@ -24,6 +24,10 @@ public:
 
 	void HandlePlayerInput(bool IsLeft, class AIFPawn* Player);
 
+	void EndGame();
+
+	class AStepPlatform* CurrentPlatform;			// Platform currently occupied by player
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -37,7 +41,7 @@ protected:
 
 	int CurrentIndex;						// Which index of Platforms is the player currently at
 
-	class AStepPlatform* NextPlatform;		// Next platform for player to reach
+	AStepPlatform* NextPlatform;		// Next platform for player to reach
 	TArray<AStepPlatform*> Platforms;		// Array of all platforms
 
 	class AInfiniteStepsGameMode* IFGameMode;
