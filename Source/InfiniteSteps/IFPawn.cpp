@@ -52,33 +52,39 @@ void AIFPawn::BeginPlay()
 		ISController->SetInputMode(InputData);
 	}
 
-	// Load player appearance option and set
+}
+
+void AIFPawn::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	LoadAndSetStyle();
+}
+
+void AIFPawn::LoadAndSetStyle()
+{
 	ISInstance = Cast<UInfiniteStepsInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	if (ISInstance)
 	{
 		if (ISInstance->LoadPlayerData())	// Load data from file
 		{
-			switch (ISInstance->DataSaveGame->PlayerOneStyle)
+			PlayerStyle = ISInstance->DataSaveGame->PlayerOneStyle;
+			switch (PlayerStyle)
 			{
 			case 0:
 				PlayerMesh->SetMaterial(0, Style1);
-				PlayerStyle = 0;
 				break;
 			case 1:
 				PlayerMesh->SetMaterial(0, Style2);
-				PlayerStyle = 1;
 				break;
 			case 2:
 				PlayerMesh->SetMaterial(0, Style3);
-				PlayerStyle = 2;
 				break;
 			case 3:
 				PlayerMesh->SetMaterial(0, Style4);
-				PlayerStyle = 3;
 				break;
 			default:
 				PlayerMesh->SetMaterial(0, Style1);
-				PlayerStyle = 0;
 				break;
 			}
 
@@ -93,6 +99,7 @@ void AIFPawn::Tick(float DeltaTime)
 
 }
 
+// Rotate the mesh towards movement direction
 void AIFPawn::RotateMesh(bool Left)
 {
 	// Rotate left

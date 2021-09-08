@@ -12,7 +12,7 @@ const FString UInfiniteStepsInstance::ScoresSaveGameName = "High_Score_Data";
 const FString UInfiniteStepsInstance::PlayerDataSaveGameName = "Player_Data";
 
 // ***
-// High scores - start
+// High scores
 // Check if save file exists
 bool UInfiniteStepsInstance::IsNewGame()
 {
@@ -64,7 +64,7 @@ bool UInfiniteStepsInstance::LoadScore()
 // High scores end
 
 // ***
-// Player data start
+// Player data
 // Check if player data file exists
 bool UInfiniteStepsInstance::DoesPlayerDataExist()
 {
@@ -81,7 +81,7 @@ void UInfiniteStepsInstance::CreatePlayerDataSave()
         if (NewSaveGame)
         {
             DataSaveGame = Cast<UPlayerDataSaveGame>(NewSaveGame);
-            UGameplayStatics::SaveGameToSlot(DataSaveGame, PlayerDataSaveGameName, 0);
+            bool bSaved = UGameplayStatics::SaveGameToSlot(DataSaveGame, PlayerDataSaveGameName, 0);
         }
     }
 }

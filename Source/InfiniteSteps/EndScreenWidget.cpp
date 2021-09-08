@@ -25,24 +25,7 @@ void UEndScreenWidget::SetScoreValue(int Value, bool bIsNewBest)
 
 void UEndScreenWidget::SetPlayerIcon(uint8 Style)
 {
-	switch (Style)
-	{
-	case 0:
-		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon1);
-		break;
-	case 1:
-		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon2);
-		break;
-	case 2:
-		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon3);
-		break;
-	case 3:
-		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon4);
-		break;
-	default:
-		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon1);
-		break;
-	}
+
 }
 
 void UEndScreenWidget::NativeOnInitialized()

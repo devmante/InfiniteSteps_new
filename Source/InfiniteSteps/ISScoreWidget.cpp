@@ -19,12 +19,6 @@ void UISScoreWidget::NativeConstruct()
 void UISScoreWidget::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
-
-	PawnRef = Cast<AIFPawn>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
-	if (PawnRef)
-	{
-		SetPlayerIcon(PawnRef->PlayerStyle);
-	}
 }
 
 void UISScoreWidget::SetScoreValue(int Value)
@@ -56,33 +50,10 @@ void UISScoreWidget::DisplayEndScreenMenu(int Score, bool bIsNewBest)
 	if (GameOverUI)
 	{
 		GameOverUI->SetScoreValue(Score, bIsNewBest);
-		GameOverUI->SetPlayerIcon(PawnRef->PlayerStyle);
 
 		if (CvpGameOver)
 		{
 			CvpGameOver->SetVisibility(ESlateVisibility::Visible);
 		}
-	}
-}
-
-void UISScoreWidget::SetPlayerIcon(uint8 Style)
-{
-	switch (Style)
-	{
-	case 0:
-		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon1);
-		break;
-	case 1:
-		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon2);
-		break;
-	case 2:
-		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon3);
-		break;
-	case 3:
-		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon4);
-		break;
-	default:
-		ImgPlayerIcon->SetBrushFromTexture(PlayerIcon1);
-		break;
 	}
 }
