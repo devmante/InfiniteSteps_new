@@ -45,11 +45,11 @@ void UISScoreWidget::SetHighScoreValue(int Value)
 	}
 }
 
-void UISScoreWidget::DisplayEndScreenMenu(int Score, bool bIsNewBest)
+void UISScoreWidget::DisplayEndScreenMenu(int Score, bool bIsNewBest, bool bHasPlayerWon)
 {
 	if (GameOverUI)
 	{
-		GameOverUI->SetScoreValue(Score, bIsNewBest);
+		GameOverUI->SetScoreValue(Score, bIsNewBest, bHasPlayerWon);
 
 		if (CvpGameOver)
 		{

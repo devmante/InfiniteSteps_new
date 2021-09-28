@@ -49,10 +49,10 @@ void AISHUD::SetHighScore(int Score)
 	}
 }
 
-void AISHUD::ShowEndGameMenu(int Score, bool bIsNewBest)
+void AISHUD::ShowEndGameMenu(int Score, bool bIsNewBest, bool bHasPlayerWon)
 {
 	if (ScoreWidget)
 	{
-		ScoreWidget->DisplayEndScreenMenu(Score, bIsNewBest);
+		ScoreWidget->DisplayEndScreenMenu(Score, bIsNewBest, bHasPlayerWon);
 	}
 }

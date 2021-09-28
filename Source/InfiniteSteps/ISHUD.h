@@ -18,7 +18,7 @@ public:
 	void UpdateSteps(int Steps);
 	void UpdateScore(int Score);
 	void SetHighScore(int Score);
-	void ShowEndGameMenu(int Score, bool bIsNewBest);
+	void ShowEndGameMenu(int Score, bool bIsNewBest, bool bHasPlayerWon);
 	
 protected:
 	virtual void BeginPlay() override;

@@ -15,29 +15,31 @@ class INFINITESTEPS_API UISScoreWidget : public UUserWidget
 
 public:
 
-	void SetScoreValue(int Value);
+	virtual void SetScoreValue(int Value);
 	void SetStepValue(int Value);
-	void SetHighScoreValue(int Value);
-	void DisplayEndScreenMenu(int Score, bool bIsNewBest);
+	virtual void SetHighScoreValue(int Value);
+	void DisplayEndScreenMenu(int Score, bool bIsNewBest, bool bHasPlayerWon);
 
-private:
-	virtual void NativeConstruct() override;
-
-	void NativeOnInitialized() override;
+protected:
 
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* StepsValue;
-
-	UPROPERTY(meta = (BindWidget))
-	UTextBlock* ScoreValue;
-
-	UPROPERTY(meta = (BindWidget))
-	UTextBlock* BestScoreValue;
 
 	UPROPERTY(meta = (BindWidget))
 	class UCanvasPanel* CvpGameOver;
 
 	UPROPERTY(meta = (BindWidget))
 	class UEndScreenWidget* GameOverUI;
+
+private:
+	virtual void NativeConstruct() override;
+
+	void NativeOnInitialized() override;
+
+	UPROPERTY(meta = (BindWidgetOptional))
+	UTextBlock* ScoreValue;
+
+	UPROPERTY(meta = (BindWidgetOptional))
+	UTextBlock* BestScoreValue;
 
 };

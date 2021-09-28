@@ -10,7 +10,7 @@
 
 #include "InfiniteStepsGameMode.h"
 
-void UEndScreenWidget::SetScoreValue(int Value, bool bIsNewBest)
+void UEndScreenWidget::SetScoreValue(int Value, bool bIsNewBest, bool bIsVictory)
 {
 	if (TxtFinalScore)
 	{
@@ -21,11 +21,6 @@ void UEndScreenWidget::SetScoreValue(int Value, bool bIsNewBest)
 	{
 		TxtNewBest->SetVisibility(ESlateVisibility::Visible);
 	}
-}
-
-void UEndScreenWidget::SetPlayerIcon(uint8 Style)
-{
-
 }
 
 void UEndScreenWidget::NativeOnInitialized()

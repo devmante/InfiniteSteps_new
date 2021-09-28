@@ -46,6 +46,8 @@ protected:
 
 	class AInfiniteStepsGameMode* IFGameMode;
 
+	bool bIsGameActive = false;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

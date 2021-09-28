@@ -46,6 +46,16 @@ void UInfiniteStepsInstance::SaveScore(int Score)
     }
 }
 
+// Save timed challenge mode score
+void UInfiniteStepsInstance::SaveTimeScore(int Time)
+{
+    if (ScoresSaveGame)
+    {
+        ScoresSaveGame->TimeModeHighScore = Time;
+        UGameplayStatics::SaveGameToSlot(ScoresSaveGame, ScoresSaveGameName, 0);
+    }
+}
+
 // Load score
 bool UInfiniteStepsInstance::LoadScore()
 {

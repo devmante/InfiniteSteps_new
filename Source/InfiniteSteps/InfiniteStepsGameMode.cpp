@@ -22,7 +22,7 @@ void AInfiniteStepsGameMode::BeginPlay()
 	ISGameInstance = Cast<UInfiniteStepsInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 
 	if (ISGameInstance)
-	{
+	{  
 		LoadBestScore();
 	}
 }
@@ -50,6 +50,8 @@ void AInfiniteStepsGameMode::LoadBestScore()
 
 void AInfiniteStepsGameMode::EndGame()
 {
+	bHasPlayerWon = true; //the default game mode has no lose/win state this is here just in case
+
 	if (Score > BestScore && ISGameInstance)
 	{
 		ISGameInstance->SaveScore(Score);
@@ -60,12 +62,18 @@ void AInfiniteStepsGameMode::EndGame()
 		UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(InputData);
 		UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetShowMouseCursor(true);
 
-		HUD->ShowEndGameMenu(Score, Score > BestScore);
+		HUD->ShowEndGameMenu(Score, Score > BestScore, bHasPlayerWon);
 	}
+}
+
+void AInfiniteStepsGameMode::StartGame()
+{
 }
 
 void AInfiniteStepsGameMode::StarOverGame()
 {
+	bHasPlayerWon = false;
+
 	FInputModeGameOnly InputData;
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(InputData);
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetShowMouseCursor(false);

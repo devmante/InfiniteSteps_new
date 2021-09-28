@@ -14,12 +14,13 @@ class AInfiniteStepsGameMode : public AGameModeBase
 public:
 	AInfiniteStepsGameMode();
 
-	void IncrementSteps();
-	void AddScoreAmount(int Amount);
+	virtual void IncrementSteps();
+	virtual void AddScoreAmount(int Amount);
 
-	void LoadBestScore();
+	virtual void LoadBestScore();
 
-	void EndGame();
+	virtual void EndGame();
+	virtual void StartGame();
 	void StarOverGame();
 
 protected:
@@ -29,6 +30,8 @@ protected:
 	int Steps = 0;
 	int Score = 0;
 	int BestScore = 0;
+
+	bool bHasPlayerWon = false;
 
 	class AISHUD* HUD;
 

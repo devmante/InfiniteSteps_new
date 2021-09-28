@@ -21,6 +21,7 @@ public:
 	void CreateNewSave();
 
 	void SaveScore(int Score);
+	void SaveTimeScore(int Time);
 	bool LoadScore();
 
 	UPROPERTY()

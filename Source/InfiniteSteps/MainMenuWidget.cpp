@@ -45,6 +45,7 @@ void UMainMenuWidget::LaunchInfiniteMode()
 
 void UMainMenuWidget::Launch300Challenge()
 {
+	UGameplayStatics::OpenLevel(GetWorld(), FName("Map_IS_300_Mode"));
 }
 
 void UMainMenuWidget::OpenStyleMenu()

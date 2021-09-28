@@ -19,4 +19,6 @@ public:
 	UPROPERTY()
 	int InfiniteModeHighScore;
 
+	UPROPERTY()
+	int TimeModeHighScore;
 };

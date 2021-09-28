@@ -95,6 +95,12 @@ void APlatformSpawner::ShiftPlatforms()
 
 void APlatformSpawner::HandlePlayerInput(bool IsLeft, AIFPawn* Player)
 {
+	if (bIsGameActive == false) 
+	{
+		bIsGameActive = true;
+		IFGameMode->StartGame();
+	}
+
 	if (IsLeft == NextPlatform->GetDirection())
 	{
 		ShiftPlatforms();
