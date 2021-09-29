@@ -51,9 +51,54 @@ protected:
 
 	void LoadAndSetStyle();
 
+	// ***
+	// Animation curves
+	UPROPERTY(EditDefaultsOnly, Category = AnimationCurves)
+	class UCurveFloat* StompCurve;
+
+	UPROPERTY(EditDefaultsOnly, Category = AnimationCurves)
+	UCurveFloat* FallCurve;
+
+	UPROPERTY(EditDefaultsOnly, Category = AnimationCurves)
+	UCurveFloat* CelebrateCurve;
+
+	// ***
+	// Anim timeline float return functions
+	UFUNCTION()
+	void StompTimelineReturnValue(float Value);
+
+	UFUNCTION()
+	void FallTimelineReturnValue(float Value);
+
+	UFUNCTION()
+	void CelebrateTimelineReturnValue(float Value);
+
+	// ***
+	// Anim timelines
+	UPROPERTY()
+	class UTimelineComponent* StompTimeline;
+
+	UPROPERTY()
+	UTimelineComponent* FallTimeline;
+
+	UPROPERTY()
+	UTimelineComponent* CelebrateTimeline;
+
+	// ***
+	// Anim vars
+
+	FVector AnimStartLocation;
+
+private:
+
+	void SetupAnimationTimelines();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	void RotateMesh(bool Left);
+	void AnimateStomp();
+	void AnimateFall();
+	void AnimateCelebration();
 };

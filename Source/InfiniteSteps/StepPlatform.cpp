@@ -22,12 +22,29 @@ AStepPlatform::AStepPlatform()
 	PlatformMesh->SetupAttachment(RootComponent);
 	PlatformMesh->SetRelativeLocation(FVector(-5.0f, 10.0f, -10.0f));
 
+	CrateMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CrateMesh"));
+	CrateMesh->SetupAttachment(RootComponent);
+	CrateMesh->SetRelativeLocation(FVector(-5.0f, 10.0f, 0.0f));
+	CrateMesh->SetVisibility(false);
+
+
 	ShakeTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("ShakeTimeline"));
 }
 
 void AStepPlatform::SetDirection(bool inDirection)
 {
 	isLeft = inDirection;
+}
+
+void AStepPlatform::DetermineCrateSpawn()
+{
+	float Roll = FMath::FRandRange(1, 10);
+
+	if (Roll == 1)
+	{
+		bContainsCrate = true;
+		CrateMesh->SetVisibility(true);
+	}
 }
 
 void AStepPlatform::ShakeTimelineReturnValue(float Value)
@@ -86,3 +103,10 @@ void AStepPlatform::DecreaseDurability()
 	}
 }
 
+void AStepPlatform::OpenCrate()
+{
+	if (bContainsCrate)
+	{
+		CrateMesh->SetVisibility(false);
+	}
+}

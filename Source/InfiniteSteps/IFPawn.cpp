@@ -8,6 +8,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Components/TimelineComponent.h"
 
 #include "PlatformSpawner.h"
 #include "ISPlayerController.h"
@@ -38,6 +39,9 @@ AIFPawn::AIFPawn()
 	Camera->SetProjectionMode(ECameraProjectionMode::Orthographic);
 	Camera->SetOrthoWidth(128);
 
+	StompTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("StompTimeline"));
+	FallTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("FallTimeline"));
+	CelebrateTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("CelebrateTimeline"));
 }
 
 // Called when the game starts or when spawned
@@ -52,6 +56,7 @@ void AIFPawn::BeginPlay()
 		ISController->SetInputMode(InputData);
 	}
 
+	SetupAnimationTimelines();
 }
 
 void AIFPawn::PostInitializeComponents()
@@ -110,5 +115,84 @@ void AIFPawn::RotateMesh(bool Left)
 	else
 	{
 		PlayerMesh->SetRelativeRotation(FRotator(0.0f, -135.0f, 0.0f));
+	}
+}
+
+void AIFPawn::AnimateStomp()
+{
+	AnimStartLocation = GetActorLocation();
+
+	if (StompTimeline)
+	{
+		StompTimeline->Play();
+	}
+}
+
+void AIFPawn::AnimateFall()
+{
+	AnimStartLocation = GetActorLocation();
+
+	if (FallTimeline)
+	{
+		FallTimeline->Play();
+	}
+}
+
+void AIFPawn::AnimateCelebration()
+{
+	AnimStartLocation = GetActorLocation();
+
+	if (CelebrateTimeline)
+	{
+		CelebrateTimeline->Play();
+	}
+}
+
+
+void AIFPawn::StompTimelineReturnValue(float Value)
+{
+}
+
+void AIFPawn::FallTimelineReturnValue(float Value)
+{
+}
+
+void AIFPawn::CelebrateTimelineReturnValue(float Value)
+{
+}
+
+void AIFPawn::SetupAnimationTimelines()
+{
+	if (StompCurve)
+	{
+		FOnTimelineFloat InterpStompFunction;
+		InterpStompFunction.BindUFunction(this, FName{ TEXT("StompTimelineReturnValue") });
+
+		if (StompTimeline)
+		{
+			StompTimeline->AddInterpFloat(StompCurve, InterpStompFunction, FName{ TEXT("Location") });
+		}
+	}
+
+	if (FallCurve)
+	{
+		FOnTimelineFloat InterpFallFunction;
+		InterpFallFunction.BindUFunction(this, FName{ TEXT("FallTimelineReturnValue") });
+
+		if (FallTimeline)
+		{
+			FallTimeline->AddInterpFloat(FallCurve, InterpFallFunction, FName{ TEXT("Location") });
+		}
+	}
+
+	if (CelebrateCurve)
+	{
+		FOnTimelineFloat InterpCelebrateFunction;
+		InterpCelebrateFunction.BindUFunction(this, FName{ TEXT("CelebrateTimelineReturnValue") });
+
+		if (CelebrateTimeline)
+		{
+			CelebrateTimeline->AddInterpFloat(CelebrateCurve, InterpCelebrateFunction, FName{ TEXT("Location") });
+		}
 	}
 }

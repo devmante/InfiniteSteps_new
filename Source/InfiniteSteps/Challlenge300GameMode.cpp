@@ -12,6 +12,7 @@
 AChalllenge300GameMode::AChalllenge300GameMode()
 {
 	bHasPlayerWon = false;
+	bSpawnCrates = false;
 }
 
 void AChalllenge300GameMode::IncrementSteps()

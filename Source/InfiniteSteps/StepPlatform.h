@@ -14,11 +14,14 @@ class INFINITESTEPS_API AStepPlatform : public AActor
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Platform, meta = (AllowPrivateAccess = "true"))
 	class UStaticMeshComponent* PlatformMesh;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Platform, meta = (AllowPrivateAccess = "true"))
+	class UStaticMeshComponent* CrateMesh;
+
 	class USceneComponent* PlatformRoot;
 	
 	// In which direction does this platform go from the previous platform
-	UPROPERTY(VisibleAnywhere)
 	bool isLeft = true;
+	bool bContainsCrate = false;
 
 public:	
 	// Sets default values for this actor's properties
@@ -26,6 +29,7 @@ public:
 
 	void SetDirection(bool inDirection);
 	bool GetDirection() { return isLeft; };
+	void DetermineCrateSpawn();
 
 	UPROPERTY(EditDefaultsOnly, Category = ShakeAnimation)
 	class UCurveFloat* ShakeCurve;
@@ -54,6 +58,8 @@ public:
 
 	UFUNCTION()
 	void DecreaseDurability();
+
+	void OpenCrate();
 
 private:
 

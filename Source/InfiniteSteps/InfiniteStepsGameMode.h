@@ -31,6 +31,10 @@ protected:
 	int Score = 0;
 	int BestScore = 0;
 
+	// Gameplay elements
+
+	bool bSpawnCrates = true;
+
 	bool bHasPlayerWon = false;
 
 	class AISHUD* HUD;
